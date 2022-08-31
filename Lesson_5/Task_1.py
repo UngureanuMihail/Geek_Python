@@ -11,6 +11,9 @@ def word_delete(text):
     return text
 
 
-# Тестовый пример
-t = 'абв ток гот рог абв сон'.split()
-print(word_delete(t))
+# Чтение и добавление в фаил
+with open('origin_file.txt', 'r') as source:
+    with open('result_file.txt', 'w') as output:
+        for i in source:
+            item = str(word_delete(i.split()))
+            output.write(item)
