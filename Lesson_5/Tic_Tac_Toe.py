@@ -40,3 +40,30 @@ def modify_array(num, turn):
         gameBoard[2][1] = turn
     elif num == 8:
         gameBoard[2][2] = turn
+
+
+finish = False
+turnCounter = 0
+
+while not finish:
+    # Ход пользователя
+    if turnCounter % 2 == 0:  # В случае остатка деления значения хода на 2 == 0, значит ход пользовтеля
+        print_game_board()
+        numberPicked = int(input("\nChoose a number [1-9]: "))  # Ввод числа
+        if numberPicked >= 1 or numberPicked <= 9:  # Условине для ввода числа из диапазона
+            modify_array(numberPicked, 'X')  # Изменение доски
+            possibleNumbers.remove(numberPicked)  # Удаление номера из списка возможных
+        else:
+            print("Invalid input. Please try again.")  # В другом случае сообщение о ошибке
+        turnCounter += 1
+
+    # Ход компьютера
+    else:
+        while True:
+            cpu_choice = random.choice(possibleNumbers)  # Случайный выбор комьютера
+            print("\nCpu choice: ", cpu_choice)
+            if cpu_choice in possibleNumbers:
+                modify_array(cpu_choice, 'O')
+                possibleNumbers.remove(cpu_choice)  # Удаление номера из списка возможных
+                turnCounter += 1
+                break
